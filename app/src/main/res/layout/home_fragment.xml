@@ -6,17 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="293dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="44dp"
+        android:text="ЗАРЕГИСТРИРОВАТЬСЯ"
+        app:layout_constraintStart_toStartOf="@+id/guardButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/guardButton"
+        android:layout_width="293dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="35dp"
+        android:text="ОХРАНА"
+        app:layout_constraintStart_toStartOf="@+id/weighButton"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <Button
+        android:id="@+id/weighButton"
+        android:layout_width="293dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="35dp"
+        android:text="ВЕСОВАЯ"
+        app:layout_constraintStart_toStartOf="@+id/unloadButton"
+        app:layout_constraintTop_toBottomOf="@+id/guardButton" />
+
+    <Button
+        android:id="@+id/unloadButton"
+        android:layout_width="293dp"
+        android:layout_height="121dp"
+        android:layout_marginTop="35dp"
+        android:text="РАЗГРУЗКА"
+        app:layout_constraintTop_toBottomOf="@+id/weighButton"
+        tools:layout_editor_absoluteX="59dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

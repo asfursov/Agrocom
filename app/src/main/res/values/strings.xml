@@ -35,4 +35,5 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_scan_barcode">FullscreenActivity</string>
+    <string name="commit">ПРОВЕРИТЬ</string>
 </resources>
