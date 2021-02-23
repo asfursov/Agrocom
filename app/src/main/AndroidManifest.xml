@@ -13,41 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Agrocom">
-
-        <!--
-               Set to true if your app is Standalone, that is, it does not require the handheld
-               app to run.
-        -->
-
+        <activity
+            android:name=".ScanBarcodeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_scan_barcode"
+            android:theme="@style/Theme.Agrocom.Fullscreen"></activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/MainTitle">
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Agrocom.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".WeighActivity"
-            android:label="@string/MainTitle">
-        </activity>
-        <activity
-            android:name=".GuardActivity"
-            android:label="@string/MainTitle">
-        </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/MainTitle">
-        </activity>
-        <activity
-            android:name=".UnloadActivity"
-            android:label="@string/MainTitle">
-        </activity>
-        <activity
-            android:name=".ScanningActivity"
-            android:label="@string/MainTitle">
-        </activity>
-
-      </application>
+    </application>
 
 </manifest>

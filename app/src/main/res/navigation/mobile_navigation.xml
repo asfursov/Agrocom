@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.asfursov.agrocom.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/home_fragment" >
+        <action
+            android:id="@+id/action_nav_home_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_guardFragment"
+            app:destination="@id/guardFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_weighFragment"
+            app:destination="@id/weighFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_unloadFragment"
+            app:destination="@id/unloadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.asfursov.agrocom.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.asfursov.agrocom.ui.login.password.PasswordFragment"
+        android:label="password_fragment"
+        tools:layout="@layout/password_fragment" >
+        <action
+            android:id="@+id/action_passwordFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.asfursov.agrocom.ui.result.ResultFragment"
+        android:label="result_fragment"
+        tools:layout="@layout/result_fragment" >
+        <action
+            android:id="@+id/action_resultFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/guardFragment"
+        android:name="com.asfursov.agrocom.ui.guard.GuardFragment"
+        android:label="guard_fragment"
+        tools:layout="@layout/guard_fragment" >
+        <action
+            android:id="@+id/action_guardFragment_to_enterFragment"
+            app:destination="@id/enterFragment" />
+        <action
+            android:id="@+id/action_guardFragment_to_leaveFragment"
+            app:destination="@id/leaveFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/enterFragment"
+        android:name="com.asfursov.agrocom.ui.guard.enter.EnterFragment"
+        android:label="enter_fragment"
+        tools:layout="@layout/enter_fragment" >
+        <action
+            android:id="@+id/action_enterFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaveFragment"
+        android:name="com.asfursov.agrocom.ui.guard.leave.LeaveFragment"
+        android:label="leave_fragment"
+        tools:layout="@layout/leave_fragment" >
+        <action
+            android:id="@+id/action_leaveFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weighFragment"
+        android:name="com.asfursov.agrocom.ui.weigh.WeighFragment"
+        android:label="weigh_fragment"
+        tools:layout="@layout/weigh_fragment" >
+        <action
+            android:id="@+id/action_weighFragment_to_startWeightFragment"
+            app:destination="@id/startWeightFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startWeightFragment"
+        android:name="com.asfursov.agrocom.ui.weigh.start.StartWeightFragment"
+        android:label="start_weight_fragment"
+        tools:layout="@layout/start_weight_fragment" >
+        <action
+            android:id="@+id/action_startWeightFragment_to_endWeighFragment"
+            app:destination="@id/endWeighFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/endWeighFragment"
+        android:name="com.asfursov.agrocom.ui.weigh.end.EndWeighFragment"
+        android:label="end_weigh_fragment"
+        tools:layout="@layout/end_weigh_fragment" >
+        <action
+            android:id="@+id/action_endWeighFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/unloadFragment"
+        android:name="com.asfursov.agrocom.ui.unload.UnloadFragment"
+        android:label="unload_fragment"
+        tools:layout="@layout/unload_fragment" >
+        <action
+            android:id="@+id/action_unloadFragment_to_startUnloadFragment"
+            app:destination="@id/startUnloadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startUnloadFragment"
+        android:name="com.asfursov.agrocom.ui.unload.start.StartUnloadFragment"
+        android:label="start_unload_fragment"
+        tools:layout="@layout/start_unload_fragment" >
+        <action
+            android:id="@+id/action_startUnloadFragment_to_endUnloadFragment"
+            app:destination="@id/endUnloadFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/endUnloadFragment"
+        android:name="com.asfursov.agrocom.ui.unload.end.EndUnloadFragment"
+        android:label="end_unload_fragment"
+        tools:layout="@layout/end_unload_fragment" >
+        <action
+            android:id="@+id/action_endUnloadFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+
+</navigation>
