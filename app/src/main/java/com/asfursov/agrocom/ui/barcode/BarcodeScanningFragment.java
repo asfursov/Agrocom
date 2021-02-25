@@ -194,8 +194,9 @@ public class BarcodeScanningFragment extends Fragment  {
 
                                 barcodeData = barcodes.valueAt(0).displayValue;
                                 barcodeText.setText(barcodeData);
-                                toneGen.startTone(ToneGenerator.TONE_CDMA_PIP, 500);
+                                toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 500);
                                 cameraSource.stop();
+                                onBarcodeScanned();
 
                             }
                         }

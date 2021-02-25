@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".ui.barcode.BarcodeScanningFragment">
+
+
+<SurfaceView
+    android:id="@+id/surface_view"
+    android:layout_width="match_parent"
+    android:layout_height="480dp"
+    android:orientation="vertical"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<TextView
+    android:id="@+id/barcode_text"
+    android:layout_width="272dp"
+    android:layout_height="50dp"
+    android:padding="5dp"
+    android:text="&lt;barcode will appear here&gt;"
+    android:textColor="#000000"
+    android:textSize="20sp"
+    app:layout_constraintEnd_toStartOf="@+id/startAgainButton"
+    app:layout_constraintHorizontal_bias="0.0"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/surface_view" />
+
+<ImageButton
+    android:id="@+id/startAgainButton"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_marginBottom="7dp"
+    app:layout_constraintBottom_toBottomOf="@+id/barcode_text"
+    app:layout_constraintEnd_toStartOf="@+id/barcodeAcceptedButton"
+    app:layout_constraintTop_toTopOf="@+id/barcode_text"
+    app:srcCompat="@drawable/ic_backspace_black_24" />
+
+<ImageButton
+    android:id="@+id/barcodeAcceptedButton"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/startAgainButton"
+    app:layout_constraintEnd_toStartOf="@+id/flashToggleButton"
+    app:layout_constraintTop_toTopOf="@+id/barcode_text"
+    app:srcCompat="@drawable/ic_check_circle_black_24" />
+
+<ImageButton
+    android:id="@+id/flashToggleButton"
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="@+id/startAgainButton"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="@+id/barcode_text"
+    app:srcCompat="@drawable/ic_flash_on_black_24" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
