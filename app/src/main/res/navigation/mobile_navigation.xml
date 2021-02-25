@@ -11,9 +11,6 @@
         android:label="@string/menu_home"
         tools:layout="@layout/home_fragment" >
         <action
-            android:id="@+id/action_nav_home_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
             android:id="@+id/action_nav_home_to_guardFragment"
             app:destination="@id/guardFragment" />
         <action
@@ -24,13 +21,16 @@
             app:destination="@id/unloadFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/nav_login"
         android:name="com.asfursov.agrocom.ui.login.LoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_loginFragment_to_passwordFragment"
             app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_nav_login_to_barcodeScanningFragment"
+            app:destination="@id/barcodeScanningFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordFragment"
@@ -48,7 +48,7 @@
         tools:layout="@layout/result_fragment" >
         <action
             android:id="@+id/action_resultFragment_to_nav_home"
-            app:destination="@id/nav_home" />
+            app:destination="@id/nav_login" />
     </fragment>
     <fragment
         android:id="@+id/guardFragment"
@@ -133,6 +133,24 @@
         <action
             android:id="@+id/action_endUnloadFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.asfursov.agrocom.ui.logout.LogoutFragment"
+        android:label="logout_fragment"
+        tools:layout="@layout/logout_fragment" >
+        <action
+            android:id="@+id/action_logoutFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/barcodeScanningFragment"
+        android:name="com.asfursov.agrocom.ui.barcode.BarcodeScanningFragment"
+        android:label="fragment_barcode_scanning"
+        tools:layout="@layout/fragment_barcode_scanning" >
+        <action
+            android:id="@+id/action_barcodeScanningFragment_to_nav_login"
+            app:destination="@id/nav_login" />
     </fragment>
 
 </navigation>

@@ -7,38 +7,36 @@
     tools:context=".ui.home.HomeFragment">
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="293dp"
-        android:layout_height="121dp"
-        android:layout_marginTop="44dp"
-        android:text="ЗАРЕГИСТРИРОВАТЬСЯ"
-        app:layout_constraintStart_toStartOf="@+id/guardButton"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/guardButton"
         android:layout_width="293dp"
         android:layout_height="121dp"
-        android:layout_marginTop="35dp"
-        android:text="ОХРАНА"
-        app:layout_constraintStart_toStartOf="@+id/weighButton"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        android:layout_marginTop="63dp"
+        android:text="@string/guardCaption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/weighButton"
         android:layout_width="293dp"
         android:layout_height="121dp"
-        android:layout_marginTop="35dp"
-        android:text="ВЕСОВАЯ"
-        app:layout_constraintStart_toStartOf="@+id/unloadButton"
+        android:text="@string/weighCaption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guardButton" />
 
     <Button
         android:id="@+id/unloadButton"
         android:layout_width="293dp"
         android:layout_height="121dp"
-        android:layout_marginTop="35dp"
-        android:text="РАЗГРУЗКА"
+        android:text="@string/unloadCaption"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weighButton"
-        tools:layout_editor_absoluteX="59dp" />
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,4 +36,13 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_scan_barcode">FullscreenActivity</string>
     <string name="commit">ПРОВЕРИТЬ</string>
+    <string name="loginCaption">ЗАРЕГИСТРИРОВАТЬСЯ</string>
+    <string name="guardCaption">ОХРАНА</string>
+    <string name="weighCaption">ВЕСОВАЯ</string>
+    <string name="unloadCaption">РАЗГРУЗКА</string>
+    <string name="home">Главная</string>
+    <string name="login">Войти</string>
+    <string name="logout">Выйти</string>
+    <string name="logoutWarning">Вы действительно хотите выйти?</string>
+    <string name="yesIwant">Да, хочу</string>
 </resources>
