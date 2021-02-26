@@ -12,27 +12,92 @@
         android:layout_height="match_parent">
 
 
-        <TextView
-            android:id="@+id/informationText"
-            android:layout_width="301dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="63dp"
-            android:text="informationText"
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scanBadgeButton" />
+            app:layout_constraintTop_toBottomOf="@+id/informationText"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/confirmPasswordText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/editTextTextPassword2"
+            android:text="@string/ReEnterPasswordText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
+        <Button
+            android:id="@+id/buttonCommitPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/CommitButtonCaption"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
+
+        <EditText
+            android:id="@+id/editTextTextPassword2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPasswordText"
+            android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/scanBadgeButton"
             android:layout_width="181dp"
             android:layout_height="159dp"
+            android:layout_marginTop="89dp"
+            android:contentDescription="@string/scan_barcode_button_hint"
             android:scaleType="fitXY"
             android:src="@drawable/ic_baseline_qr_code_scanner_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="89dp" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/informationText"
+            android:layout_width="301dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="63dp"
+            android:labelFor="@id/editTextTextPassword"
+            android:text="@string/info_text_hint"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scanBadgeButton" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/groupConfirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="confirmPasswordText,editTextTextPassword2" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/passwordGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="editTextTextPassword,groupConfirmPassword,buttonCommitPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

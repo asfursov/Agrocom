@@ -109,9 +109,13 @@ public class BarcodeScanningFragment extends Fragment  {
 
     private void onBarcodeScanned() {
         AppData.GetInstance().setLastBarcode(barcodeData);
-        ((MainActivity)getActivity()).getNavController().navigate(
-                AppData.GetInstance().getBarcodeScannerReturnAction()
-        );
+        try {
+            ((MainActivity) getActivity()).getNavController().navigate(
+                    AppData.GetInstance().getBarcodeScannerReturnAction()
+            );
+        }
+        catch (Exception e){        }
+
     }
 
     private void PutBarcodeToClipboard() {

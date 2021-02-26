@@ -34,4 +34,8 @@ public class UserData {
         if (roles.indexOf(role)>=0) return true;
         return false;
     }
+
+    public boolean newPasswordRequired() {
+        return true;
+    }
 }
