@@ -6,6 +6,10 @@ import java.util.UUID;
 public class UserData {
     private UUID id;
 
+    public UserData() {
+        roles = new ArrayList<>();
+    }
+
     public UUID getId() {
         return id;
     }
@@ -19,6 +23,7 @@ public class UserData {
     }
 
     private String Name;
+
     private ArrayList<Role> roles;
 
     public String getRolesAsText() {
@@ -31,11 +36,14 @@ public class UserData {
     }
 
     public boolean  hasRole(Role role) {
-        if (roles.indexOf(role)>=0) return true;
-        return false;
+        return roles.contains(role);
     }
 
     public boolean newPasswordRequired() {
+        return true;
+    }
+
+    public boolean authorized() {
         return true;
     }
 }

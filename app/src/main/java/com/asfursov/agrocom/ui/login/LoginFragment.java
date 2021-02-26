@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavOptions;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -23,14 +22,22 @@ import android.widget.TextView;
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.model.UserData;
-import com.asfursov.agrocom.network.NetworkHelper;
+import com.asfursov.agrocom.network.APIHelper;
 import com.asfursov.agrocom.state.AppData;
+import com.asfursov.agrocom.state.Constants;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.asfursov.agrocom.state.Constants.ERROR;
+import static com.asfursov.agrocom.state.Constants.MESSAGE;
+
 public class LoginFragment extends Fragment {
 
+    public static final String USER_SUCCESSULLY_LOGIN = "Пользователь успешно авторизован";
+    public static final String WRONG_BARCODE = "Неправильный штрихкод. Повторите попытку";
+    public static final String ENTER_PASSWORD = "Введите пароль:";
+    public static final String SCAN_BADGE = "Просканируйте бейдж пользователя";
     private LoginViewModel mViewModel;
 
     public static LoginFragment newInstance() {
@@ -65,15 +72,14 @@ public class LoginFragment extends Fragment {
     }
 
     private void Initialize() {
-        switch(AppData.GetInstance().getBarcodeScannerReturnAction()) {
-            case R.id.action_barcodeScanningFragment_to_nav_login:
-            {
-                processScannedBarcode();
-                break;
-            }
-            default:
-            infotext.setText("Просканируйте бейдж пользователя");
+        Bundle param = getArguments();
+        if(param!=null && param.getString(Constants.BARCODE)!=null) {
+            processScannedBarcode();
+            return;
         }
+
+        infotext.setText(SCAN_BADGE);
+
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,19 +90,19 @@ public class LoginFragment extends Fragment {
     }
 
     private void processScannedBarcode() {
-        UserData user = NetworkHelper.findUserByBarcode(AppData.GetInstance().getLastBarcode());
+        UserData user = APIHelper.findUserByBarcode(AppData.GetInstance().getLastBarcode());
         if (user!=null)
             AuthenticateUser(user);
         else
         {
-            infotext.setText("Неправильный штрихкод. Повторите попытку");
+            infotext.setText(WRONG_BARCODE);
         }
     }
 
     private void AuthenticateUser(UserData user) {
         scanButton.setVisibility(View.GONE);
 
-        infotext.setText("Введите пароль:");
+        infotext.setText(ENTER_PASSWORD);
         passwordGroup.setVisibility(View.VISIBLE);
 
         if(user.newPasswordRequired())
@@ -133,6 +139,13 @@ public class LoginFragment extends Fragment {
     }
 
     private void checkPassword(UserData user) {
+        UserData newUser = APIHelper.AuthorizeUser(user.getId(),password.getText());
+        if  (newUser.authorized()) {
+            AppData.GetInstance().setUser(user);
+            Bundle params = new Bundle();
+            params.putString(MESSAGE, USER_SUCCESSULLY_LOGIN);
+            ((MainActivity) getActivity()).getNavController().navigate(R.id.resultFragment, params);
+        }
 
     }
 

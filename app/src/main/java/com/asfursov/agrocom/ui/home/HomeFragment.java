@@ -81,15 +81,18 @@ public class HomeFragment extends Fragment {
             unload.setVisibility(View.GONE);
         }
         else{
-            if (user.hasRole(Role.GUARD)){
+            if (user.hasRole(Role.GUARD))
                 guard.setVisibility(View.VISIBLE);
-            };
-            if (user.hasRole(Role.WEIGH)){
+            else
+                guard.setVisibility(View.GONE);
+            if (user.hasRole(Role.WEIGH))
                 weigh.setVisibility(View.VISIBLE);
-            };
-            if (user.hasRole(Role.UNLOAD)){
+            else
+                weigh.setVisibility(View.GONE);
+            if (user.hasRole(Role.UNLOAD))
                 unload.setVisibility(View.VISIBLE);
-            };
+            else
+                unload.setVisibility(View.GONE);
         }
     }
 }

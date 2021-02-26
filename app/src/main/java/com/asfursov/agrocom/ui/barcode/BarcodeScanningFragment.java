@@ -22,10 +22,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.state.AppData;
+import com.asfursov.agrocom.state.Constants;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -110,11 +112,20 @@ public class BarcodeScanningFragment extends Fragment  {
     private void onBarcodeScanned() {
         AppData.GetInstance().setLastBarcode(barcodeData);
         try {
+            int barcodeScannerReturnAction = AppData.GetInstance().getBarcodeScannerReturnAction();
+
+            AppData.GetInstance().setBarcodeScannerReturnAction(0);
+
+            Bundle param = new Bundle();
+            param.putString(Constants.BARCODE,barcodeData);
             ((MainActivity) getActivity()).getNavController().navigate(
-                    AppData.GetInstance().getBarcodeScannerReturnAction()
+                    barcodeScannerReturnAction,param
             );
         }
-        catch (Exception e){        }
+        catch (Exception e)
+        {
+            Toast.makeText(getContext(), e.getMessage()+"\r"+e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+        }
 
     }
 

@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         UpdateMenu();
     }
 
-    private void UpdateMenu() {
+    public void UpdateMenu() {
 
         UserData user = AppData.GetInstance().getUser();
 
