@@ -29,7 +29,6 @@ import com.asfursov.agrocom.state.Constants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.asfursov.agrocom.state.Constants.ERROR;
 import static com.asfursov.agrocom.state.Constants.MESSAGE;
 
 public class LoginFragment extends Fragment {
@@ -90,7 +89,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void processScannedBarcode() {
-        UserData user = APIHelper.findUserByBarcode(AppData.GetInstance().getLastBarcode());
+        UserData user = APIHelper.findUserByBarcode(AppData.getInstance().getLastBarcode());
         if (user!=null)
             AuthenticateUser(user);
         else
@@ -141,7 +140,7 @@ public class LoginFragment extends Fragment {
     private void checkPassword(UserData user) {
         UserData newUser = APIHelper.AuthorizeUser(user.getId(),password.getText());
         if  (newUser.authorized()) {
-            AppData.GetInstance().setUser(user);
+            AppData.getInstance().setUser(user);
             Bundle params = new Bundle();
             params.putString(MESSAGE, USER_SUCCESSULLY_LOGIN);
             ((MainActivity) getActivity()).getNavController().navigate(R.id.resultFragment, params);
@@ -150,8 +149,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void ScanBarcode() {
-        AppData.GetInstance().setBarcodeScannerReturnAction(R.id.action_barcodeScanningFragment_to_nav_login);
-        AppData.GetInstance().setLastBarcode(null);
+        AppData.getInstance().setBarcodeScannerReturnAction(R.id.action_barcodeScanningFragment_to_nav_login);
+        AppData.getInstance().setLastBarcode(null);
         ((MainActivity)getActivity()).getNavController().navigate(R.id.action_nav_login_to_barcodeScanningFragment);
     }
 

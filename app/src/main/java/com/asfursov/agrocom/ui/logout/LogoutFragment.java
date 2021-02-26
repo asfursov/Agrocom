@@ -39,7 +39,7 @@ public class LogoutFragment extends Fragment {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppData.GetInstance().setUser(null);
+                AppData.getInstance().setUser(null);
                 ((MainActivity)getActivity()).UpdateMenu();
             }
         });
