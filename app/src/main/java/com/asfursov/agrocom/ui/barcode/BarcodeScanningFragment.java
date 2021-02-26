@@ -110,11 +110,11 @@ public class BarcodeScanningFragment extends Fragment  {
     }
 
     private void onBarcodeScanned() {
-        AppData.GetInstance().setLastBarcode(barcodeData);
+        AppData.getInstance().setLastBarcode(barcodeData);
         try {
-            int barcodeScannerReturnAction = AppData.GetInstance().getBarcodeScannerReturnAction();
+            int barcodeScannerReturnAction = AppData.getInstance().getBarcodeScannerReturnAction();
 
-            AppData.GetInstance().setBarcodeScannerReturnAction(0);
+            AppData.getInstance().setBarcodeScannerReturnAction(0);
 
             Bundle param = new Bundle();
             param.putString(Constants.BARCODE,barcodeData);

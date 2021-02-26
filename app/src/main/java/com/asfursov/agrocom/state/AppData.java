@@ -4,7 +4,7 @@ import com.asfursov.agrocom.model.UserData;
 
 public class AppData {
     private static AppData instance;
-    public static AppData GetInstance(){
+    public static AppData getInstance(){
         if (instance==null) instance=new AppData();
         return instance;
     };

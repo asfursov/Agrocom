@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void UpdateMenu() {
 
-        UserData user = AppData.GetInstance().getUser();
+        UserData user = AppData.getInstance().getUser();
 
         if(user==null)
         {
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void UpdateUser() {
-        UserData user = AppData.GetInstance().getUser();
+        UserData user = AppData.getInstance().getUser();
         if(user!=null) {
             username.setText(user.getName());
             roles.setText(user.getRolesAsText());
