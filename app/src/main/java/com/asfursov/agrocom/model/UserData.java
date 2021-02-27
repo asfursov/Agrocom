@@ -10,19 +10,22 @@ public class UserData {
         roles = new ArrayList<>();
     }
 
+    private boolean pwdUpdated;
+    private boolean pwdUpdateRequired;
+
     public UUID getId() {
         return id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public ArrayList<Role> getRoles() {
         return roles;
     }
 
-    private String Name;
+    private String name;
 
     private ArrayList<Role> roles;
 
@@ -40,10 +43,10 @@ public class UserData {
     }
 
     public boolean newPasswordRequired() {
-        return true;
+        return pwdUpdateRequired;
     }
 
     public boolean authorized() {
-        return true;
+        return id!=null;
     }
 }

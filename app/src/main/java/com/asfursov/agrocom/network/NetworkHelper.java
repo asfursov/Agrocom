@@ -93,11 +93,11 @@ public class NetworkHelper {
 //        return sb.toString();
 //    }
 
-//    public SevenAPI getAPI() {
-//        if (mRetrofit != null)
-//            return mRetrofit.create(SevenAPI.class);
-//        return null;
-//    }
+    public API  getAPI() {
+        if (mRetrofit != null)
+            return mRetrofit.create(API.class);
+        return null;
+    }
 //
 //    public Call<Item> invokeItemSearch(String template, KindOfItemSearch kindOfItemSearch) {
 //        if (kindOfItemSearch==KindOfItemSearch.BARCODE)
