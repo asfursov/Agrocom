@@ -70,6 +70,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        buildTypes.each {
+            it.buildConfigField "String", "LOGIN", app_initial_user
+            it.buildConfigField "String", "PASSWORD", app_initial_password
+            it.buildConfigField "String", "BASE_URL", app_initial_url
+            it.buildConfigField "Integer", "CONNECT_TIMEOUT", "5"
+            it.buildConfigField "Integer", "READ_TIMEOUT", "5"
+            it.buildConfigField "Integer", "WRITE_TIMEOUT", "5"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
