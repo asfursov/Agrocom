@@ -1,17 +1,14 @@
 package com.asfursov.agrocom.ui.logout;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -22,7 +19,6 @@ import butterknife.ButterKnife;
 
 public class LogoutFragment extends Fragment {
 
-    private LogoutViewModel mViewModel;
     @BindView(R.id.logoutButton)
     Button logoutButton;
 
@@ -50,8 +46,6 @@ public class LogoutFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(LogoutViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }
