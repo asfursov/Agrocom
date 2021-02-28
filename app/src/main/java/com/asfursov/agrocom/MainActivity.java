@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void UpdateUser() {
+    public void UpdateUser() {
         UserData user = AppData.getInstance().getUser();
         if(user!=null) {
             username.setText(user.getName());

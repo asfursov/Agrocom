@@ -39,14 +39,11 @@ public class UserData {
     }
 
     public boolean  hasRole(Role role) {
-        return roles.contains(role);
+        return roles.contains(role) || roles.contains(Role.GOD);
     }
 
     public boolean newPasswordRequired() {
         return pwdUpdateRequired;
     }
 
-    public boolean authorized() {
-        return id!=null;
-    }
 }

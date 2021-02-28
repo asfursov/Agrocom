@@ -73,7 +73,7 @@
         <TextView
             android:id="@+id/informationText"
             android:layout_width="301dp"
-            android:layout_height="41dp"
+            android:layout_height="0dp"
             android:layout_marginTop="63dp"
             android:labelFor="@id/editTextTextPassword"
             android:text="@string/info_text_hint"
