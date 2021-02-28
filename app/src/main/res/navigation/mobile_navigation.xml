@@ -66,10 +66,13 @@
         android:id="@+id/enterFragment"
         android:name="com.asfursov.agrocom.ui.guard.enter.EnterFragment"
         android:label="enter_fragment"
-        tools:layout="@layout/enter_fragment" >
+        tools:layout="@layout/enter_fragment">
         <action
             android:id="@+id/action_enterFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_enterFragment_to_barcodeScanningFragment"
+            app:destination="@id/barcodeScanningFragment" />
     </fragment>
     <fragment
         android:id="@+id/leaveFragment"
@@ -147,10 +150,13 @@
         android:id="@+id/barcodeScanningFragment"
         android:name="com.asfursov.agrocom.ui.barcode.BarcodeScanningFragment"
         android:label="fragment_barcode_scanning"
-        tools:layout="@layout/fragment_barcode_scanning" >
+        tools:layout="@layout/fragment_barcode_scanning">
         <action
             android:id="@+id/action_barcodeScanningFragment_to_nav_login"
             app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_barcodeScanningFragment_to_enterFragment"
+            app:destination="@id/enterFragment" />
     </fragment>
 
 </navigation>

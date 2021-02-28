@@ -1,22 +1,32 @@
 package com.asfursov.agrocom.ui.guard;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.R;
+import com.asfursov.agrocom.model.OperationId;
+import com.asfursov.agrocom.state.Constants;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class GuardFragment extends Fragment {
 
     private GuardViewModel mViewModel;
+    @BindView(R.id.buttonEnter)
+    Button enterButton;
+    @BindView(R.id.buttonLeave)
+    Button leaveButton;
+
 
     public static GuardFragment newInstance() {
         return new GuardFragment();
@@ -25,7 +35,30 @@ public class GuardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.guard_fragment, container, false);
+        View root = inflater.inflate(R.layout.guard_fragment, container, false);
+
+        ButterKnife.bind(this, root);
+
+        enterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RedirectToScan(view, OperationId.ENTER);
+            }
+        });
+        leaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RedirectToScan(view, OperationId.LEAVE);
+            }
+        });
+        return root;
+
+    }
+
+    private void RedirectToScan(View view, OperationId operationId) {
+        Bundle paramForGuard = new Bundle();
+        paramForGuard.putSerializable(Constants.OPERATION, operationId);
+        Navigation.findNavController(view).navigate(R.id.action_guardFragment_to_enterFragment, paramForGuard);
     }
 
     @Override

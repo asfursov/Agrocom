@@ -50,4 +50,6 @@
     <string name="scan_barcode_button_hint">Scan Barcode Button</string>
     <string name="info_text_hint">informationText</string>
     <string name="enterPlateNumber">Подтвердите госномер:</string>
+    <string name="ENTER">Прибытие</string>
+    <string name="LEAVE">Выбытие</string>
 </resources>

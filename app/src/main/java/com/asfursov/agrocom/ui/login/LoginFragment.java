@@ -1,15 +1,6 @@
 package com.asfursov.agrocom.ui.login;
 
-import androidx.constraintlayout.widget.Group;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -21,6 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.Group;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.BuildConfig;
 import com.asfursov.agrocom.MainActivity;
@@ -76,17 +73,17 @@ public class LoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root =  inflater.inflate(R.layout.login_fragment, container, false);
-        ButterKnife.bind(this,root);
-        Initialize();
+        ButterKnife.bind(this, root);
+        initialize();
         return root;
     }
 
-    private void Initialize() {
+    private void initialize() {
 
         scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ScanBarcode();
+                scanBarcode();
             }
         });
 
@@ -110,12 +107,12 @@ public class LoginFragment extends Fragment {
             public void onResponse(Call<UserData> call, Response<UserData> response) {
                 stopProgressIndicator();
                 if(response.code()==403 && response.body()==null){
-                    AuthenticateUser(barcode,false);
+                    authenticateUser(barcode, false);
                     return;
-                };
+                }
 
                 if(response.code()==200 && response.body()!=null){
-                    AuthenticateUser(barcode,response.body().newPasswordRequired());
+                    authenticateUser(barcode, response.body().newPasswordRequired());
                 }
                 else
                     setErrorText(WRONG_BARCODE);
@@ -135,7 +132,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void startProgressIndicator() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void setErrorText(String text) {
@@ -143,11 +140,11 @@ public class LoginFragment extends Fragment {
         infotext.setTextColor(ContextCompat.getColor(getContext(),R.color.red));
     }
 
-    private void AuthenticateUser(String barcode,  Boolean newPasswordRequired) {
+    private void authenticateUser(String barcode, Boolean newPasswordRequired) {
         scanButton.setVisibility(View.GONE);
 
         infotext.setText(ENTER_PASSWORD);
-        infotext.setTextColor(ContextCompat.getColor(getContext(),R.color.green));
+        infotext.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,10 +216,10 @@ public class LoginFragment extends Fragment {
         main.getNavController().navigate(R.id.resultFragment, params);
     }
 
-    private void ScanBarcode() {
+    private void scanBarcode() {
         AppData.getInstance().setBarcodeScannerReturnAction(R.id.action_barcodeScanningFragment_to_nav_login);
         AppData.getInstance().setLastBarcode(null);
-        ((MainActivity)getActivity()).getNavController().navigate(R.id.action_nav_login_to_barcodeScanningFragment);
+        ((MainActivity) getActivity()).getNavController().navigate(R.id.action_nav_login_to_barcodeScanningFragment);
     }
 
 }

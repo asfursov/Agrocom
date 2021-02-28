@@ -18,4 +18,8 @@ public enum OperationId {
         }
         return "Не определено";
     }
+
+    public int getValue() {
+        return value;
+    }
 }
