@@ -43,6 +43,7 @@ public class LoginFragment extends Fragment {
     public static final String ENTER_PASSWORD = "Введите пароль:";
     public static final String SCAN_BADGE = "Просканируйте бейдж пользователя";
     public static final String AUTH_ERROR = "Ошибка авторизации.\rПовторите ввод пароля:";
+    public static final String REQUEST_USER_DATA = "Запрашиваем данные пользователя...";
     private int defColor;
 
     public static LoginFragment newInstance() {
@@ -101,6 +102,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void processScannedBarcode(String barcode) {
+        infotext.setText(REQUEST_USER_DATA);
         startProgressIndicator();
         NetworkHelper.getInstance().getAPI().login(new LoginRequest(barcode, null)).enqueue(new Callback<UserData>() {
             @Override
