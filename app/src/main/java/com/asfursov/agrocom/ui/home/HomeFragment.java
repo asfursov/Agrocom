@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
         guard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppData.getInstance().setRole(Role.GUARD);
                 Navigation.findNavController(view).navigate(R.id.action_nav_home_to_guardFragment);
 
             }
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment {
         weigh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppData.getInstance().setRole(Role.WEIGH);
                 Navigation.findNavController(view).navigate(R.id.action_nav_home_to_weighFragment);
 
             }
@@ -58,6 +60,7 @@ public class HomeFragment extends Fragment {
         unload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppData.getInstance().setRole(Role.UNLOAD);
                 Navigation.findNavController(view).navigate(R.id.action_nav_home_to_unloadFragment);
 
             }

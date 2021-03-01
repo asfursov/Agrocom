@@ -26,20 +26,8 @@
         android:label="login_fragment"
         tools:layout="@layout/login_fragment" >
         <action
-            android:id="@+id/action_loginFragment_to_passwordFragment"
-            app:destination="@id/passwordFragment" />
-        <action
             android:id="@+id/action_nav_login_to_barcodeScanningFragment"
             app:destination="@id/barcodeScanningFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/passwordFragment"
-        android:name="com.asfursov.agrocom.ui.login.password.PasswordFragment"
-        android:label="password_fragment"
-        tools:layout="@layout/password_fragment" >
-        <action
-            android:id="@+id/action_passwordFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -56,7 +44,7 @@
         android:label="guard_fragment"
         tools:layout="@layout/guard_fragment" >
         <action
-            android:id="@+id/action_guardFragment_to_enterFragment"
+            android:id="@+id/action_guardFragment_to_operationFragment"
             app:destination="@id/enterFragment" />
         <action
             android:id="@+id/action_guardFragment_to_leaveFragment"
@@ -64,9 +52,9 @@
     </fragment>
     <fragment
         android:id="@+id/enterFragment"
-        android:name="com.asfursov.agrocom.ui.guard.enter.EnterFragment"
+        android:name="com.asfursov.agrocom.ui.operation.OperationFragment"
         android:label="enter_fragment"
-        tools:layout="@layout/enter_fragment">
+        tools:layout="@layout/operation_fragment">
         <action
             android:id="@+id/action_enterFragment_to_resultFragment"
             app:destination="@id/resultFragment" />

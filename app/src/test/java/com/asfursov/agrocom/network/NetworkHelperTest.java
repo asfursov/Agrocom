@@ -1,6 +1,9 @@
 package com.asfursov.agrocom.network;
 
 import com.asfursov.agrocom.model.LoginRequest;
+import com.asfursov.agrocom.model.OperationAllowedRequest;
+import com.asfursov.agrocom.model.OperationAllowedResponse;
+import com.asfursov.agrocom.model.OperationId;
 import com.asfursov.agrocom.model.UserData;
 
 import junit.framework.TestCase;
@@ -72,4 +75,18 @@ public class NetworkHelperTest extends TestCase {
 
     }
 
+    public void testIsAllowed() throws IOException {
+        API api = NetworkHelper.getInstance().getAPI();
+        Call<OperationAllowedResponse> call = api.isAllowed(
+                new OperationAllowedRequest(
+                        "4be635ec-71ce-11eb-9c93-70c94edd47e0",
+                        "0C9769A4-5026-11EB-9C8A-70C94EDD47E0",
+                        OperationId.LEAVE
+                ));
+
+        Response<OperationAllowedResponse> response = call.execute();
+        assertEquals("Response code", 200, response.code());
+
+
+    }
 }

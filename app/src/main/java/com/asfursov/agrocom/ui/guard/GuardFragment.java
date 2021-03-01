@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.model.OperationId;
-import com.asfursov.agrocom.state.Constants;
+import com.asfursov.agrocom.state.AppData;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,9 +56,8 @@ public class GuardFragment extends Fragment {
     }
 
     private void RedirectToScan(View view, OperationId operationId) {
-        Bundle paramForGuard = new Bundle();
-        paramForGuard.putSerializable(Constants.OPERATION, operationId);
-        Navigation.findNavController(view).navigate(R.id.action_guardFragment_to_enterFragment, paramForGuard);
+        AppData.getInstance().setOperationId(operationId);
+        Navigation.findNavController(view).navigate(R.id.action_guardFragment_to_operationFragment);
     }
 
     @Override

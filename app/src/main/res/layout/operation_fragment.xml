@@ -9,7 +9,7 @@
     tools:context=".ui.login.LoginFragment">
 
     <ProgressBar
-        android:id="@+id/progressBarEnter"
+        android:id="@+id/progressBarOperation"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -23,7 +23,7 @@
 
 
         <Button
-            android:id="@+id/buttonCommitEnter"
+            android:id="@+id/buttonCommitOperation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -35,7 +35,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextPlate" />
 
         <ImageButton
-            android:id="@+id/scanBadgeButtonEnter"
+            android:id="@+id/scanBadgeButtonOperation"
             android:layout_width="181dp"
             android:layout_height="159dp"
             android:layout_marginTop="89dp"
@@ -49,11 +49,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/informationTextEnter"
+            android:id="@+id/informationTextOperation"
             android:layout_width="301dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="63dp"
-            android:labelFor="@id/editTextTextPassword"
             android:text="@string/info_text_hint"
             android:textAlignment="center"
             android:textSize="14sp"
@@ -61,7 +60,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scanBadgeButtonEnter" />
+            app:layout_constraintTop_toBottomOf="@+id/scanBadgeButtonOperation" />
 
         <TextView
             android:id="@+id/enterPlateText"
@@ -73,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/informationTextEnter" />
+            app:layout_constraintTop_toBottomOf="@+id/informationTextOperation" />
 
         <EditText
             android:id="@+id/editTextPlate"
@@ -93,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="enterPlateText,editTextPlate,buttonCommitEnter" />
+            app:constraint_referenced_ids="enterPlateText,editTextPlate,buttonCommitOperation" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

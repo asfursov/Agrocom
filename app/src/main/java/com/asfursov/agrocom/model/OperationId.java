@@ -19,6 +19,16 @@ public enum OperationId {
         return "Не определено";
     }
 
+    public String getAPIName() {
+        switch (this) {
+            case ENTER:
+                return "ENTER";
+            case LEAVE:
+                return "LEAVE";
+        }
+        return "DEFAULT";
+    }
+
     public int getValue() {
         return value;
     }

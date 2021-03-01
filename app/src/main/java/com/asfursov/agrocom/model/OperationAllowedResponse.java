@@ -1,6 +1,6 @@
 package com.asfursov.agrocom.model;
 
-public class EnterAllowedResponse {
+public class OperationAllowedResponse {
     VehicleData vehicle;
     boolean allowed;
     String message;
