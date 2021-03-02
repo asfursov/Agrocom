@@ -77,3 +77,5 @@ public class Settings {
     }
 
 }
+//TODOL default values
+//TODOL hide credentials
