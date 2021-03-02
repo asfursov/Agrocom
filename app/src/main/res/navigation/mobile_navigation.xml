@@ -146,5 +146,9 @@
             android:id="@+id/action_barcodeScanningFragment_to_enterFragment"
             app:destination="@id/enterFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.asfursov.agrocom.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>
