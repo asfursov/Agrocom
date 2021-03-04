@@ -83,11 +83,11 @@ public class BarcodeScanningFragment extends Fragment  {
         return null;
     }
 
-    private void InitializeOnClickListeners() {
+    private void initializeOnClickListeners() {
         barcodeAcceptedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PutBarcodeToClipboard();
+                putBarcodeToClipboard();
                 onBarcodeScanned();
 
             }
@@ -96,7 +96,7 @@ public class BarcodeScanningFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 try {
-                    RunScanning();
+                    runScanning();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -138,7 +138,7 @@ public class BarcodeScanningFragment extends Fragment  {
 
     }
 
-    private void PutBarcodeToClipboard() {
+    private void putBarcodeToClipboard() {
         ClipboardManager clipboard = (ClipboardManager) (getActivity().getSystemService(getContext().CLIPBOARD_SERVICE));
         ClipData clip = ClipData.newPlainText("code", barcodeData);
         clipboard.setPrimaryClip(clip);
@@ -155,13 +155,12 @@ public class BarcodeScanningFragment extends Fragment  {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_barcode_scanning, container, false);
         ButterKnife.bind(this, rootView);
-        isShot = false;
-        InitializeOnClickListeners();
+        initializeOnClickListeners();
         return rootView;
     }
 
     @SuppressLint("MissingPermission")
-    private void RunScanning() throws IOException {
+    private void runScanning() throws IOException {
         cameraSource.start(surfaceView.getHolder());
         setFlash(flashState);
     }
@@ -198,7 +197,7 @@ public class BarcodeScanningFragment extends Fragment  {
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
                     if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        RunScanning();
+                        runScanning();
                     } else {
                         ActivityCompat.requestPermissions(getActivity(), new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
