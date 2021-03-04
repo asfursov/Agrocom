@@ -161,6 +161,7 @@ public class BarcodeScanningFragment extends Fragment  {
 
     @SuppressLint("MissingPermission")
     private void runScanning() throws IOException {
+        isShot = false;
         cameraSource.start(surfaceView.getHolder());
         setFlash(flashState);
     }
