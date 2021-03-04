@@ -9,11 +9,6 @@ import android.hardware.Camera;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -23,6 +18,10 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -55,23 +54,33 @@ public class BarcodeScanningFragment extends Fragment  {
 
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
-    private boolean flashState=false;
+    private boolean flashState = false;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
+    static boolean isShot = false;
 
     //This class provides methods to play DTMF tones
     private ToneGenerator toneGen;
 
     private String barcodeData;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_barcode_scanning, container, false);
-        ButterKnife.bind(this, rootView);
+    public static Camera getCamera(CameraSource cameraSource) {
+        Field[] declaredFields = CameraSource.class.getDeclaredFields();
 
-        InitializeOnClickListeners();
-        return  rootView;
+        for (Field field : declaredFields) {
+            if (field.getType() == Camera.class) {
+                field.setAccessible(true);
+                try {
+                    Camera camera = (Camera) field.get(cameraSource);
+                    return camera;
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            }
+        }
+
+        return null;
     }
 
     private void InitializeOnClickListeners() {
@@ -131,13 +140,44 @@ public class BarcodeScanningFragment extends Fragment  {
 
     private void PutBarcodeToClipboard() {
         ClipboardManager clipboard = (ClipboardManager) (getActivity().getSystemService(getContext().CLIPBOARD_SERVICE));
-        ClipData clip = ClipData.newPlainText("code",barcodeData);
+        ClipData clip = ClipData.newPlainText("code", barcodeData);
         clipboard.setPrimaryClip(clip);
     }
 
 
     public String getScannedBarcode() {
         return barcodeData;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_barcode_scanning, container, false);
+        ButterKnife.bind(this, rootView);
+        isShot = false;
+        InitializeOnClickListeners();
+        return rootView;
+    }
+
+    @SuppressLint("MissingPermission")
+    private void RunScanning() throws IOException {
+        cameraSource.start(surfaceView.getHolder());
+        setFlash(flashState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        cameraSource.release();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+        initialiseDetectorsAndSources();
     }
 
     private void initialiseDetectorsAndSources() {
@@ -149,7 +189,7 @@ public class BarcodeScanningFragment extends Fragment  {
                 .build();
 
         cameraSource = new CameraSource.Builder(getContext(), barcodeDetector)
-                .setRequestedPreviewSize(1024, 768)
+                .setRequestedPreviewSize(1024, 512)
                 .setAutoFocusEnabled(true) //you should add this feature
                 .build();
 
@@ -191,8 +231,9 @@ public class BarcodeScanningFragment extends Fragment  {
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-                if (barcodes.size() != 0) {
+                if (barcodes.size() != 0 && !isShot) {
 
+                    isShot = true;
 
                     barcodeText.post(new Runnable() {
 
@@ -204,6 +245,7 @@ public class BarcodeScanningFragment extends Fragment  {
                                 barcodeData = barcodes.valueAt(0).email.address;
                                 barcodeText.setText(barcodeData);
                                 toneGen.startTone(ToneGenerator.TONE_PROP_BEEP, 500);
+                                cameraSource.stop();
                                 onBarcodeScanned();
                             } else {
 
@@ -220,49 +262,6 @@ public class BarcodeScanningFragment extends Fragment  {
                 }
             }
         });
-    }
-
-    @SuppressLint("MissingPermission")
-    private void RunScanning() throws IOException {
-        cameraSource.start(surfaceView.getHolder());
-        setFlash(flashState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-        cameraSource.release();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
-        initialiseDetectorsAndSources();
-    }
-    public static Camera getCamera(CameraSource cameraSource) {
-        Field[] declaredFields = CameraSource.class.getDeclaredFields();
-
-        for (Field field : declaredFields) {
-            if (field.getType() == Camera.class) {
-                field.setAccessible(true);
-                try {
-                    Camera camera = (Camera) field.get(cameraSource);
-                    if (camera != null) {
-                        return camera;
-                    }
-
-                    return null;
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-
-                break;
-            }
-        }
-
-        return null;
     }
 
 
