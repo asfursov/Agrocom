@@ -1,25 +1,21 @@
 package com.asfursov.agrocom.ui.guard;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.model.OperationId;
 import com.asfursov.agrocom.state.AppData;
+import com.asfursov.agrocom.ui.common.TitledFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class GuardFragment extends Fragment {
+public class GuardFragment extends TitledFragment {
 
     private GuardViewModel mViewModel;
     @BindView(R.id.buttonEnter)
@@ -33,12 +29,13 @@ public class GuardFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.guard_fragment, container, false);
+    protected String getTitle() {
+        return "ОХРАНА";
+    }
 
-        ButterKnife.bind(this, root);
-
+    @Override
+    protected void initialize() {
+        super.initialize();
         enterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,8 +48,12 @@ public class GuardFragment extends Fragment {
                 RedirectToScan(view, OperationId.LEAVE);
             }
         });
-        return root;
+    }
 
+
+    @Override
+    protected int getFragmentId() {
+        return R.layout.guard_fragment;
     }
 
     private void RedirectToScan(View view, OperationId operationId) {

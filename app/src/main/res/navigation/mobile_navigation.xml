@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/nav_login"
         android:name="com.asfursov.agrocom.ui.login.LoginFragment"
-        android:label="login_fragment"
+        android:label="Авторизация"
         tools:layout="@layout/login_fragment" >
         <action
             android:id="@+id/action_nav_login_to_barcodeScanningFragment"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.asfursov.agrocom.ui.result.ResultFragment"
-        android:label="result_fragment"
+        android:label="РЕЗУЛЬТАТ"
         tools:layout="@layout/result_fragment" >
         <action
             android:id="@+id/action_resultFragment_to_nav_home"
@@ -41,19 +41,16 @@
     <fragment
         android:id="@+id/guardFragment"
         android:name="com.asfursov.agrocom.ui.guard.GuardFragment"
-        android:label="guard_fragment"
+        android:label="ОХРАНА"
         tools:layout="@layout/guard_fragment" >
         <action
             android:id="@+id/action_guardFragment_to_operationFragment"
             app:destination="@id/enterFragment" />
-        <action
-            android:id="@+id/action_guardFragment_to_leaveFragment"
-            app:destination="@id/leaveFragment" />
     </fragment>
     <fragment
         android:id="@+id/enterFragment"
         android:name="com.asfursov.agrocom.ui.operation.OperationFragment"
-        android:label="enter_fragment"
+        android:label="ОПЕРАЦИЯ"
         tools:layout="@layout/operation_fragment">
         <action
             android:id="@+id/action_enterFragment_to_resultFragment"
@@ -62,15 +59,7 @@
             android:id="@+id/action_enterFragment_to_barcodeScanningFragment"
             app:destination="@id/barcodeScanningFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/leaveFragment"
-        android:name="com.asfursov.agrocom.ui.guard.leave.LeaveFragment"
-        android:label="leave_fragment"
-        tools:layout="@layout/leave_fragment" >
-        <action
-            android:id="@+id/action_leaveFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/weighFragment"
         android:name="com.asfursov.agrocom.ui.weigh.WeighFragment"
@@ -128,7 +117,7 @@
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.asfursov.agrocom.ui.logout.LogoutFragment"
-        android:label="logout_fragment"
+        android:label="ВЫХОД"
         tools:layout="@layout/logout_fragment" >
         <action
             android:id="@+id/action_logoutFragment_to_resultFragment"
@@ -137,7 +126,7 @@
     <fragment
         android:id="@+id/barcodeScanningFragment"
         android:name="com.asfursov.agrocom.ui.barcode.BarcodeScanningFragment"
-        android:label="fragment_barcode_scanning"
+        android:label="СКАННЕР"
         tools:layout="@layout/fragment_barcode_scanning">
         <action
             android:id="@+id/action_barcodeScanningFragment_to_nav_login"
@@ -149,6 +138,6 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.asfursov.agrocom.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="НАСТРОЙКИ" />
 
 </navigation>

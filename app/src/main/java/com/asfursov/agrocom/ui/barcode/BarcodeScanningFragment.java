@@ -19,14 +19,16 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.state.AppData;
 import com.asfursov.agrocom.state.Constants;
+import com.asfursov.agrocom.ui.common.TitledFragment;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
@@ -36,9 +38,8 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class BarcodeScanningFragment extends Fragment  {
+public class BarcodeScanningFragment extends TitledFragment {
 
 
     @BindView(R.id.surface_view)
@@ -126,16 +127,18 @@ public class BarcodeScanningFragment extends Fragment  {
             AppData.getInstance().setBarcodeScannerReturnAction(0);
 
             Bundle param = new Bundle();
-            param.putString(Constants.BARCODE,barcodeData);
+            param.putString(Constants.BARCODE, barcodeData);
             ((MainActivity) getActivity()).getNavController().navigate(
-                    barcodeScannerReturnAction,param
+                    barcodeScannerReturnAction, param
             );
-        }
-        catch (Exception e)
-        {
-            Toast.makeText(getContext(), e.getMessage()+"\r"+e.getStackTrace().toString(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast(e.getMessage() + "\r" + e.getStackTrace().toString());
         }
 
+    }
+
+    protected void Toast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     private void putBarcodeToClipboard() {
@@ -150,13 +153,20 @@ public class BarcodeScanningFragment extends Fragment  {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_barcode_scanning, container, false);
-        ButterKnife.bind(this, rootView);
+    protected String getTitle() {
+        return null;
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
         initializeOnClickListeners();
         return rootView;
+    }
+
+    @Override
+    protected int getFragmentId() {
+        return R.layout.fragment_barcode_scanning;
     }
 
     @SuppressLint("MissingPermission")

@@ -1,18 +1,12 @@
 package com.asfursov.agrocom.ui.common;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -21,16 +15,21 @@ import com.asfursov.agrocom.state.Constants;
 
 import org.jetbrains.annotations.NotNull;
 
-import butterknife.ButterKnife;
+public abstract class ScanningFormFragment extends TitledFragment {
 
-public abstract class ScanningFormFragment extends Fragment {
-    protected View root;
-
+    public static final String SCANNER = "СКАННЕР";
     protected ImageButton scanBadgeButton;
     protected TextView information;
     protected ProgressBar progressBar;
 
+    @Override
+    protected String getTitle() {
+        return SCANNER;
+    }
+
+    @Override
     protected void initialize() {
+        super.initialize();
         bindViews(getScanButtonView(), getInformationTextView(), getProgressBar());
         processParameters(getArguments());
         updateTitle();
@@ -41,29 +40,10 @@ public abstract class ScanningFormFragment extends Fragment {
         information.setText(getInitialText());
     }
 
-    protected void processParameters(Bundle arguments) {
-    }
-
-    private void updateTitle() {
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(getTitle());
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
-    }
-
-    protected abstract String getTitle();
-
     protected abstract int getProgressBar();
 
     @NotNull
     protected abstract String getInitialText();
-
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        root = inflater.inflate(getFragmentId(), container, false);
-        ButterKnife.bind(this, root);
-        initialize();
-        return root;
-    }
 
     protected abstract int getInformationTextView();
 
@@ -79,9 +59,9 @@ public abstract class ScanningFormFragment extends Fragment {
     }
 
     protected void bindViews(int scanButtonId, int informationTextId, int progressBarId) {
-        scanBadgeButton = root.findViewById(scanButtonId);
-        information = root.findViewById(informationTextId);
-        progressBar = root.findViewById(progressBarId);
+        scanBadgeButton = rootView.findViewById(scanButtonId);
+        information = rootView.findViewById(informationTextId);
+        progressBar = rootView.findViewById(progressBarId);
 
     }
 
@@ -125,5 +105,4 @@ public abstract class ScanningFormFragment extends Fragment {
 
     protected abstract int getScanningReturnAction();
 
-    protected abstract int getFragmentId();
 }

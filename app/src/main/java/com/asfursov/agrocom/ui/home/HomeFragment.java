@@ -1,45 +1,49 @@
 package com.asfursov.agrocom.ui.home;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.model.Role;
 import com.asfursov.agrocom.model.UserData;
 import com.asfursov.agrocom.state.AppData;
+import com.asfursov.agrocom.ui.common.TitledFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends TitledFragment {
 
+    private static final String TITLE = "ГЛАВНАЯ";
     private HomeViewModel homeViewModel;
+
     @BindView(R.id.guardButton)
     Button guard;
     @BindView(R.id.weighButton)
     Button weigh;
     @BindView(R.id.unloadButton)
     Button unload;
+    @BindView(R.id.greetingTextView)
+    TextView greetingsText;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.home_fragment, container, false);
+    @Override
+    protected String getTitle() {
+        return TITLE;
+    }
 
-        ButterKnife.bind(this,root);
-
+    @Override
+    protected void initialize() {
+        super.initialize();
         setVisibility();
+        setOnClickListeners();
 
+    }
+
+    private void setOnClickListeners() {
         guard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,31 +69,45 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        
-        return root;
+    }
+
+
+    @Override
+    protected int getFragmentId() {
+        return R.layout.home_fragment;
     }
 
     private void setVisibility() {
         UserData user = AppData.getInstance().getUser();
-        if (user==null)
-        {
+        if (user == null) {
             guard.setVisibility(View.GONE);
             weigh.setVisibility(View.GONE);
             unload.setVisibility(View.GONE);
         }
-        else{
-            if (user.hasRole(Role.GUARD))
+        else {
+            boolean hasAtLeastOneRole = false;
+            if (user.hasRole(Role.GUARD)) {
                 guard.setVisibility(View.VISIBLE);
-            else
+                hasAtLeastOneRole = true;
+            } else
                 guard.setVisibility(View.GONE);
-            if (user.hasRole(Role.WEIGH))
+
+            if (user.hasRole(Role.WEIGH)) {
                 weigh.setVisibility(View.VISIBLE);
-            else
+                hasAtLeastOneRole = true;
+            } else
                 weigh.setVisibility(View.GONE);
-            if (user.hasRole(Role.UNLOAD))
+            if (user.hasRole(Role.UNLOAD)) {
                 unload.setVisibility(View.VISIBLE);
-            else
+                hasAtLeastOneRole = true;
+
+            } else
                 unload.setVisibility(View.GONE);
+            if (!hasAtLeastOneRole) {
+                greetingsText.setVisibility(View.VISIBLE);
+                greetingsText.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+            } else
+                greetingsText.setVisibility(View.GONE);
         }
     }
 }

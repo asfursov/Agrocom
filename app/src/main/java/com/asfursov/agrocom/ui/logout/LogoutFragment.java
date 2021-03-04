@@ -1,23 +1,19 @@
 package com.asfursov.agrocom.ui.logout;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
 import com.asfursov.agrocom.state.AppData;
+import com.asfursov.agrocom.ui.common.TitledFragment;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class LogoutFragment extends Fragment {
+public class LogoutFragment extends TitledFragment {
 
     @BindView(R.id.logoutButton)
     Button logoutButton;
@@ -27,20 +23,25 @@ public class LogoutFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        View root =  inflater.inflate(R.layout.logout_fragment, container, false);
-        ButterKnife.bind(this,root);
-
+    protected void initialize() {
+        super.initialize();
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppData.getInstance().setUser(null);
-                ((MainActivity)getActivity()).UpdateMenu();
+                ((MainActivity) getActivity()).UpdateMenu();
             }
         });
-        //Initialize();
-        return root;
+    }
+
+    @Override
+    protected String getTitle() {
+        return "ВЫХОД";
+    }
+
+    @Override
+    protected int getFragmentId() {
+        return R.layout.logout_fragment;
     }
 
     @Override

@@ -31,7 +31,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Настройки</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">ГЛАВНАЯ</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_activity_scan_barcode">FullscreenActivity</string>

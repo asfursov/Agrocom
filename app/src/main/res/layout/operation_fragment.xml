@@ -55,7 +55,7 @@
             android:layout_marginTop="63dp"
             android:text="@string/info_text_hint"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="20sp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
