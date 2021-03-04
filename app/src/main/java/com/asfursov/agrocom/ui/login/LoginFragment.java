@@ -30,7 +30,6 @@ import static com.asfursov.agrocom.state.Constants.MESSAGE;
 public class LoginFragment extends com.asfursov.agrocom.ui.common.ScanningFormFragment {
 
     public static final String USER_SUCCESSFULLY_LOGGED_IN = "Пользователь успешно авторизован";
-    public static final String WRONG_BARCODE = "Неправильный штрихкод. Повторите попытку";
     public static final String ENTER_PASSWORD = "Введите пароль:";
     public static final String SCAN_BADGE = "Просканируйте бейдж пользователя";
     public static final String AUTH_ERROR = "Ошибка авторизации.\rПовторите ввод пароля:";

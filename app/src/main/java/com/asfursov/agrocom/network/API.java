@@ -1,5 +1,6 @@
 package com.asfursov.agrocom.network;
 
+import com.asfursov.agrocom.model.EnterLeaveRequest;
 import com.asfursov.agrocom.model.LoginRequest;
 import com.asfursov.agrocom.model.OperationAllowedRequest;
 import com.asfursov.agrocom.model.OperationAllowedResponse;
@@ -15,5 +16,9 @@ public interface API {
 
     @POST("isAllowed")
     Call<OperationAllowedResponse> isAllowed(@Body OperationAllowedRequest request);
+
+    @POST("enter")
+    Call<OperationAllowedResponse> operate(@Body EnterLeaveRequest request);
+
 
 }

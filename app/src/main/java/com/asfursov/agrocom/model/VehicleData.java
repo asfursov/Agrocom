@@ -9,6 +9,24 @@ public class VehicleData {
     String driver;
     String phone;
 
+    public String getNumber() {
+        return number;
+    }
+
+    public String getPlateNumber() {
+        return plateNumber;
+    }
+
+    public String getDriver() {
+        return driver.
+                replace("(", "\n(")
+                .replace(";", ";\n");
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
     public UUID getId() {
         return id;
     }

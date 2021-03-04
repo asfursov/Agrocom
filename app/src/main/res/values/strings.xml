@@ -50,8 +50,8 @@
     <string name="scan_barcode_button_hint">Scan Barcode Button</string>
     <string name="info_text_hint">informationText</string>
     <string name="enterPlateNumber">Подтвердите госномер:</string>
-    <string name="ENTER">Прибытие</string>
-    <string name="LEAVE">Выбытие</string>
+    <string name="ENTER">ЗАЕЗД</string>
+    <string name="LEAVE">ВЫЕЗД</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

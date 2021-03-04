@@ -18,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public abstract class ScanningFormFragment extends TitledFragment {
 
     public static final String SCANNER = "СКАННЕР";
+    public static final String WRONG_BARCODE = "Неправильный штрихкод. Повторите попытку";
     protected ImageButton scanBadgeButton;
     protected TextView information;
     protected ProgressBar progressBar;
@@ -33,6 +34,8 @@ public abstract class ScanningFormFragment extends TitledFragment {
         bindViews(getScanButtonView(), getInformationTextView(), getProgressBar());
         processParameters(getArguments());
         updateTitle();
+        scanBadgeButton.setVisibility(View.VISIBLE);
+
         scanBadgeButton.setOnClickListener(provideScanButtonListener());
 
         dispatchBarcode();
