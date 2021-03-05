@@ -54,10 +54,10 @@
         tools:layout="@layout/guard_fragment" >
         <action
             android:id="@+id/action_guardFragment_to_operationFragment"
-            app:destination="@id/enterFragment" />
+            app:destination="@id/operationFragment" />
     </fragment>
     <fragment
-        android:id="@+id/enterFragment"
+        android:id="@+id/operationFragment"
         android:name="com.asfursov.agrocom.ui.operation.OperationFragment"
         android:label="ОПЕРАЦИЯ"
         tools:layout="@layout/operation_fragment">
@@ -72,57 +72,25 @@
     <fragment
         android:id="@+id/weighFragment"
         android:name="com.asfursov.agrocom.ui.weigh.WeighFragment"
-        android:label="weigh_fragment"
+        android:label="ВЗВЕШИВАНИЕ"
         tools:layout="@layout/weigh_fragment" >
+
         <action
-            android:id="@+id/action_weighFragment_to_startWeightFragment"
-            app:destination="@id/startWeightFragment" />
+            android:id="@+id/action_weighFragment_to_operationFragment"
+            app:destination="@id/operationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/startWeightFragment"
-        android:name="com.asfursov.agrocom.ui.weigh.start.StartWeightFragment"
-        android:label="start_weight_fragment"
-        tools:layout="@layout/start_weight_fragment" >
-        <action
-            android:id="@+id/action_startWeightFragment_to_endWeighFragment"
-            app:destination="@id/endWeighFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/endWeighFragment"
-        android:name="com.asfursov.agrocom.ui.weigh.end.EndWeighFragment"
-        android:label="end_weigh_fragment"
-        tools:layout="@layout/end_weigh_fragment" >
-        <action
-            android:id="@+id/action_endWeighFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/unloadFragment"
         android:name="com.asfursov.agrocom.ui.unload.UnloadFragment"
-        android:label="unload_fragment"
+        android:label="ВЫГРУЗКА"
         tools:layout="@layout/unload_fragment" >
+
         <action
-            android:id="@+id/action_unloadFragment_to_startUnloadFragment"
-            app:destination="@id/startUnloadFragment" />
+            android:id="@+id/action_unloadFragment_to_operationFragment"
+            app:destination="@id/operationFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/startUnloadFragment"
-        android:name="com.asfursov.agrocom.ui.unload.start.StartUnloadFragment"
-        android:label="start_unload_fragment"
-        tools:layout="@layout/start_unload_fragment" >
-        <action
-            android:id="@+id/action_startUnloadFragment_to_endUnloadFragment"
-            app:destination="@id/endUnloadFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/endUnloadFragment"
-        android:name="com.asfursov.agrocom.ui.unload.end.EndUnloadFragment"
-        android:label="end_unload_fragment"
-        tools:layout="@layout/end_unload_fragment" >
-        <action
-            android:id="@+id/action_endUnloadFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.asfursov.agrocom.ui.logout.LogoutFragment"
@@ -144,7 +112,7 @@
             app:destination="@id/nav_login" />
         <action
             android:id="@+id/action_barcodeScanningFragment_to_enterFragment"
-            app:destination="@id/enterFragment" />
+            app:destination="@id/operationFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"

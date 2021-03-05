@@ -179,13 +179,15 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
             return response.body().getMessage();
         if (response.errorBody() != null) {
             try {
-                JsonObject obj = new JsonParser().parse(response.errorBody().string()).getAsJsonObject();
-                return obj.get("message").getAsString();
-            } catch (Throwable t) {
+                String responseBody = response.errorBody().string();
                 try {
-                    return response.errorBody().string();
-                } catch (IOException e) {
+                    JsonObject obj = new JsonParser().parse(responseBody).getAsJsonObject();
+                    return obj.get("message").getAsString();
+                } catch (Throwable t) {
+
+                    return responseBody;
                 }
+            } catch (IOException e) {
             }
         }
         return response.message();

@@ -21,13 +21,13 @@ public enum OperationId {
             case LEAVE:
                 return "Выезд";
             case WEIGH_START:
-                return "НАЧАТЬ";
+                return "ЗАЕЗД НА ВЕСЫ";
             case WEIGH_END:
-                return "Закончить";
+                return "ВЫЕЗД С ВЕСОВ";
             case UNLOAD_START:
-                return "Начать";
+                return "НАЧАЛО ВЫГРУЗКИ";
             case UNLOAD_END:
-                return "Закончить";
+                return "ВЫГРУЗКА";
         }
         return "Не определено";
     }
