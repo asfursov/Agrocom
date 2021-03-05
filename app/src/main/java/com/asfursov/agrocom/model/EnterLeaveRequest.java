@@ -10,7 +10,7 @@ public class EnterLeaveRequest {
         this.vehicleId = vehicle.getId().toString();
         this.userId = operator.getId().toString();
         this.plateNumber = plateNumber;
-        this.operationId = operationId.getName();
+        this.operationId = operationId.getAPIName();
     }
 
 }
