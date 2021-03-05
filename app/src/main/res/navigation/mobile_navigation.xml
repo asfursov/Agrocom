@@ -9,7 +9,9 @@
         android:id="@+id/nav_home"
         android:name="com.asfursov.agrocom.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/home_fragment" >
+        app:popUpTo="@+id/nav_home"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_nav_home_to_guardFragment"
             app:destination="@id/guardFragment" />
@@ -19,12 +21,17 @@
         <action
             android:id="@+id/action_nav_home_to_unloadFragment"
             app:destination="@id/unloadFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_logout"
+            app:destination="@id/nav_logout" />
     </fragment>
     <fragment
         android:id="@+id/nav_login"
         android:name="com.asfursov.agrocom.ui.login.LoginFragment"
         android:label="Авторизация"
-        tools:layout="@layout/login_fragment" >
+        app:popUpTo="@+id/nav_login"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/action_nav_login_to_barcodeScanningFragment"
             app:destination="@id/barcodeScanningFragment" />
@@ -36,7 +43,9 @@
         tools:layout="@layout/result_fragment" >
         <action
             android:id="@+id/action_resultFragment_to_nav_home"
-            app:destination="@id/nav_login" />
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/guardFragment"
@@ -120,8 +129,10 @@
         android:label="ВЫХОД"
         tools:layout="@layout/logout_fragment" >
         <action
-            android:id="@+id/action_logoutFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            android:id="@+id/action_nav_logout_to_nav_login"
+            app:destination="@id/nav_login"
+            app:popUpTo="@id/nav_login"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/barcodeScanningFragment"

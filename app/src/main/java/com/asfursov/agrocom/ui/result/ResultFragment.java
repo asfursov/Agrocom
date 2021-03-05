@@ -24,6 +24,8 @@ public class ResultFragment extends TitledFragment {
     @BindView(R.id.result_Ok_Button)
     Button okButton;
 
+    private int returnAction = R.id.action_resultFragment_to_nav_home;
+
     public static ResultFragment newInstance() {
         return new ResultFragment();
     }
@@ -41,6 +43,8 @@ public class ResultFragment extends TitledFragment {
     @Override
     protected void processParameters(Bundle arguments) {
         super.processParameters(arguments);
+        if (arguments.containsKey(Constants.RETURN_ACTION))
+            returnAction = arguments.getInt(Constants.RETURN_ACTION);
         if (arguments.containsKey(Constants.MESSAGE)) {
             resultText.setText(arguments.getString(Constants.MESSAGE));
             resultText.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
@@ -56,7 +60,7 @@ public class ResultFragment extends TitledFragment {
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) getActivity()).UpdateMenu();
+                ((MainActivity) getActivity()).getNavController().navigate(returnAction);
             }
         });
 

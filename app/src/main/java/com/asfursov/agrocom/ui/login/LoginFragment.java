@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
+import androidx.navigation.NavOptions;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -186,10 +187,12 @@ public class LoginFragment extends com.asfursov.agrocom.ui.common.ScanningFormFr
         MainActivity main = ((MainActivity) getActivity());
         AppData.getInstance().setUser(user);
         main.UpdateUser();
+        main.UpdateMenu();
 
         Bundle params = new Bundle();
         params.putString(MESSAGE, USER_SUCCESSFULLY_LOGGED_IN);
-        main.getNavController().navigate(R.id.resultFragment, params);
+        main.getNavController().navigate(R.id.resultFragment, params,
+                new NavOptions.Builder().setPopUpTo(R.id.nav_home, false).build());
     }
 
 

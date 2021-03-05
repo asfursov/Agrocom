@@ -20,8 +20,12 @@ import com.asfursov.agrocom.model.VehicleData;
 import com.asfursov.agrocom.network.NetworkHelper;
 import com.asfursov.agrocom.state.AppData;
 import com.asfursov.agrocom.state.Constants;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -34,7 +38,7 @@ import static com.asfursov.agrocom.state.Constants.MESSAGE;
 public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFormFragment {
 
     public static final String SCAN_DRIVER = "Отсканируйте код с браслета:";
-    public static final String NOT_ALLOWED = "НЕ РАЗРЕШЕНО\nr";
+    public static final String NOT_ALLOWED = "НЕ РАЗРЕШЕНО\n";
     @BindView(R.id.buttonCommitOperation)
     Button buttonCommit;
 
@@ -164,19 +168,36 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
                 if (response.code() == 200 && response.body() != null) {
                     processAllowance(barcode, response.body());
                 } else
-                    setErrorText(WRONG_BARCODE + "\r" + response.message());
+                    setErrorText(WRONG_BARCODE + "\n" + decodeResponseMessage(response));
 
             }
 
             @Override
             public void onFailure(Call<OperationAllowedResponse> call, Throwable t) {
                 stopProgressIndicator();
-                setErrorText(Constants.NETWORKING_ERROR + "\r+" + t.getMessage());
+                setErrorText(Constants.NETWORKING_ERROR + "\n+" + t.getMessage());
 
 
             }
 
         });
+    }
+
+    private String decodeResponseMessage(Response<OperationAllowedResponse> response) {
+        if (response.body() != null)
+            return response.body().getMessage();
+        if (response.errorBody() != null) {
+            try {
+                JsonObject obj = new JsonParser().parse(response.errorBody().string()).getAsJsonObject();
+                return obj.get("message").getAsString();
+            } catch (Throwable t) {
+                try {
+                    return response.errorBody().string();
+                } catch (IOException e) {
+                }
+            }
+        }
+        return response.message();
     }
 
     private void processAllowance(String barcode, OperationAllowedResponse body) {

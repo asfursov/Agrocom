@@ -7,4 +7,5 @@ public class Constants {
 
     public static final String NETWORKING_ERROR = "Ошибка получения данных.\rСканируйте снова!";
     public static final String OPERATION = "OPERATION";
+    public static final String RETURN_ACTION = "RETURN_ACTION";
 }

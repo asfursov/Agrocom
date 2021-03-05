@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             menuLogout.setEnabled(true);
             menuHome.setEnabled(true);
             menuHome.setChecked(true);
-            navController.navigate(R.id.nav_home);
+
         }
     }
 

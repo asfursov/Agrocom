@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.Nullable;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -30,6 +32,10 @@ public class LogoutFragment extends TitledFragment {
             public void onClick(View view) {
                 AppData.getInstance().setUser(null);
                 ((MainActivity) getActivity()).UpdateMenu();
+                Navigation.findNavController(view).navigate(R.id.nav_login, new Bundle(),
+                        new NavOptions.Builder()
+                                .setPopUpTo(R.id.nav_home, true)
+                                .build());
             }
         });
     }

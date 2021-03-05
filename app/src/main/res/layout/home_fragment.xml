@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
         android:layout_marginBottom="350dp"
-        android:text="Добрый день! Мы вас знаем и рады что Вы с нами, но для вас нет доступных операций!"
+        android:text="@string/noOperations"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

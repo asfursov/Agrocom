@@ -23,6 +23,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.navigation.NavOptions;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -129,7 +130,7 @@ public class BarcodeScanningFragment extends TitledFragment {
             Bundle param = new Bundle();
             param.putString(Constants.BARCODE, barcodeData);
             ((MainActivity) getActivity()).getNavController().navigate(
-                    barcodeScannerReturnAction, param
+                    barcodeScannerReturnAction, param, new NavOptions.Builder().setPopUpTo(R.id.nav_home, false).build()
             );
         } catch (Exception e) {
             Toast(e.getMessage() + "\r" + e.getStackTrace().toString());
