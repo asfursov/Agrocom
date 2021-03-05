@@ -1,11 +1,8 @@
 package com.asfursov.agrocom.ui.guard;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.asfursov.agrocom.R;
@@ -17,7 +14,7 @@ import butterknife.BindView;
 
 public class GuardFragment extends TitledFragment {
 
-    private GuardViewModel mViewModel;
+    public static final String GUARD = "ОХРАНА";
     @BindView(R.id.buttonEnter)
     Button enterButton;
     @BindView(R.id.buttonLeave)
@@ -30,7 +27,7 @@ public class GuardFragment extends TitledFragment {
 
     @Override
     protected String getTitle() {
-        return "ОХРАНА";
+        return GUARD;
     }
 
     @Override
@@ -59,13 +56,6 @@ public class GuardFragment extends TitledFragment {
     private void RedirectToScan(View view, OperationId operationId) {
         AppData.getInstance().setOperationId(operationId);
         Navigation.findNavController(view).navigate(R.id.action_guardFragment_to_operationFragment);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(GuardViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

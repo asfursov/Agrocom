@@ -18,7 +18,6 @@ import butterknife.BindView;
 public class HomeFragment extends TitledFragment {
 
     private static final String TITLE = "ГЛАВНАЯ";
-    private HomeViewModel homeViewModel;
 
     @BindView(R.id.guardButton)
     Button guard;

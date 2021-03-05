@@ -5,10 +5,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.Group;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.asfursov.agrocom.MainActivity;
 import com.asfursov.agrocom.R;
@@ -45,7 +43,6 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     private OperationId operationId;
     @BindView(R.id.plateConfirmGroup)
     Group plateGroup;
-    private OperationViewModel mViewModel;
 
     @BindView(R.id.editTextPlate)
     EditText plateNumber;
@@ -112,12 +109,6 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
         return operationId.getName().toUpperCase();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(OperationViewModel.class);
-        // TODO: Use the ViewModel
-    }
 
     @Override
     protected int getInformationTextView() {

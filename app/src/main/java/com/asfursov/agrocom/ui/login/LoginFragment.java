@@ -99,13 +99,13 @@ public class LoginFragment extends com.asfursov.agrocom.ui.common.ScanningFormFr
                 if(response.code()==200 && response.body()!=null){
                     authenticateUser(barcode, response.body().newPasswordRequired());
                 } else
-                    setErrorText(WRONG_BARCODE + "\r" + response.message());
+                    setErrorText(WRONG_BARCODE + "\n" + response.message());
             }
 
             @Override
             public void onFailure(Call<UserData> call, Throwable t) {
                 stopProgressIndicator();
-                setErrorText(Constants.NETWORKING_ERROR + "\r+" + t.getMessage());
+                setErrorText(Constants.NETWORKING_ERROR + "\n+" + t.getMessage());
                 //if(BuildConfig.DEBUG) Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

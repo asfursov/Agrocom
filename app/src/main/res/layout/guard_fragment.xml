@@ -11,10 +11,9 @@
         android:id="@+id/buttonEnter"
         android:layout_width="293dp"
         android:layout_height="121dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="124dp"
         android:text="@string/ENTER"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,10 +21,9 @@
         android:id="@+id/buttonLeave"
         android:layout_width="293dp"
         android:layout_height="121dp"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="60dp"
         android:text="@string/LEAVE"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonEnter" />
 </androidx.constraintlayout.widget.ConstraintLayout>
