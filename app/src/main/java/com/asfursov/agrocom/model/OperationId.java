@@ -17,9 +17,9 @@ public enum OperationId {
     public String getName() {
         switch (this) {
             case ENTER:
-                return "Заезд";
+                return "ЗАЕЗД";
             case LEAVE:
-                return "Выезд";
+                return "ВЫЕЗД";
             case WEIGH_START:
                 return "ЗАЕЗД НА ВЕСЫ";
             case WEIGH_END:
@@ -27,7 +27,7 @@ public enum OperationId {
             case UNLOAD_START:
                 return "НАЧАЛО ВЫГРУЗКИ";
             case UNLOAD_END:
-                return "ВЫГРУЗКА";
+                return "ВЫГРУЗКА ОКОНЧЕНА";
         }
         return "Не определено";
     }

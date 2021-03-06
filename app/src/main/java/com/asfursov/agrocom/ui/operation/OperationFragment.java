@@ -118,6 +118,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     protected void processParameters(Bundle arguments) {
         super.processParameters(arguments);
         operationId = AppData.getInstance().getOperationId();
+        buttonCommit.setText(operationId.getName());
         platform = AppData.getInstance().getPlatform();
     }
 
@@ -275,7 +276,10 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
                 body.getVehicle().getNumber(),
                 body.getVehicle().getDriver(),
-                body.getVehicle().getPhone());
+                body.getVehicle().getPhone())
+                + (operationId == OperationId.UNLOAD_START ?
+                String.format("\nВлажность:%.1f\n" +
+                        "Сорность:%.1f", body.getHumidity(), body.getTrash()) : "");
         if (!body.isAllowed()) {
             setErrorText(docdata + NOT_ALLOWED + body.getMessage());
             plateGroup.setVisibility(View.GONE);
