@@ -3,6 +3,7 @@ package com.asfursov.agrocom.state;
 import android.content.Context;
 
 import com.asfursov.agrocom.model.OperationId;
+import com.asfursov.agrocom.model.Platform;
 import com.asfursov.agrocom.model.Role;
 import com.asfursov.agrocom.model.UserData;
 
@@ -10,6 +11,7 @@ public class AppData {
     private static AppData instance;
     private OperationId operationId;
     private Context context;
+    private Platform platform;
 
     public Context getContext() {
         return context;
@@ -74,5 +76,13 @@ public class AppData {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Platform getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(Platform platform) {
+        this.platform = platform;
     }
 }

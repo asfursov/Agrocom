@@ -4,6 +4,8 @@ import com.asfursov.agrocom.model.LoginRequest;
 import com.asfursov.agrocom.model.OperationAllowedRequest;
 import com.asfursov.agrocom.model.OperationAllowedResponse;
 import com.asfursov.agrocom.model.OperationId;
+import com.asfursov.agrocom.model.PlatformAvailableRequest;
+import com.asfursov.agrocom.model.PlatformAvailableResponse;
 import com.asfursov.agrocom.model.UserData;
 
 import junit.framework.TestCase;
@@ -116,6 +118,17 @@ public class NetworkHelperTest extends TestCase {
 
         Response<OperationAllowedResponse> response = call.execute();
         assertEquals("Response code", 403, response.code());
+
+
+    }
+
+    public void testIsAvailable() throws IOException {
+        API api = NetworkHelper.getInstance().getAPI();
+        Call<PlatformAvailableResponse> call = api.isAvailable(new PlatformAvailableRequest("0C9769A4-5026-11EB-9C8A-70C94EDD47E0",
+                "3ad90dcf-3fd6-11eb-9c88-70c94edd47e0"));
+
+        Response<PlatformAvailableResponse> response = call.execute();
+        assertEquals("Response code", 200, response.code());
 
 
     }

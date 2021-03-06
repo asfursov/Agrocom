@@ -41,7 +41,7 @@ public class WeighFragment extends TitledFragment {
         leaveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RedirectToScan(view, OperationId.UNLOAD_END);
+                RedirectToScan(view, OperationId.WEIGH_END);
             }
         });
     }
@@ -54,6 +54,7 @@ public class WeighFragment extends TitledFragment {
 
     private void RedirectToScan(View view, OperationId operationId) {
         AppData.getInstance().setOperationId(operationId);
+        AppData.getInstance().setPlatform(null);
         Navigation.findNavController(view).navigate(R.id.action_weighFragment_to_operationFragment);
     }
 

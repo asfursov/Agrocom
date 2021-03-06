@@ -1,19 +1,20 @@
 package com.asfursov.agrocom.model;
 
-public class OperationAllowedResponse {
+public class OperationAllowedResponse extends OperationResponse {
     public VehicleData getVehicle() {
         return vehicle;
     }
 
-    public boolean isAllowed() {
-        return allowed;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
     VehicleData vehicle;
-    boolean allowed;
-    String message;
+
+    float humidity;
+    float trash;
+
+    public float getHumidity() {
+        return humidity;
+    }
+
+    public float getTrash() {
+        return trash;
+    }
 }

@@ -38,6 +38,14 @@ public enum OperationId {
                 return "ENTER";
             case LEAVE:
                 return "LEAVE";
+            case WEIGH_START:
+                return "WEIGH_START";
+            case WEIGH_END:
+                return "WEIGH_END";
+            case UNLOAD_START:
+                return "UNLOAD_START";
+            case UNLOAD_END:
+                return "UNLOAD_END";
         }
         return "DEFAULT";
     }

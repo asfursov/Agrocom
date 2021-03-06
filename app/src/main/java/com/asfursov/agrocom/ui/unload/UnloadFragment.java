@@ -55,7 +55,8 @@ public class UnloadFragment extends TitledFragment {
 
     private void RedirectToScan(View view, OperationId operationId) {
         AppData.getInstance().setOperationId(operationId);
-        Navigation.findNavController(view).navigate(R.id.action_guardFragment_to_operationFragment);
+        AppData.getInstance().setPlatform(null);
+        Navigation.findNavController(view).navigate(R.id.action_unloadFragment_to_operationFragment);
     }
 
 }

@@ -4,6 +4,8 @@ import com.asfursov.agrocom.model.EnterLeaveRequest;
 import com.asfursov.agrocom.model.LoginRequest;
 import com.asfursov.agrocom.model.OperationAllowedRequest;
 import com.asfursov.agrocom.model.OperationAllowedResponse;
+import com.asfursov.agrocom.model.PlatformAvailableRequest;
+import com.asfursov.agrocom.model.PlatformAvailableResponse;
 import com.asfursov.agrocom.model.UserData;
 
 import retrofit2.Call;
@@ -20,5 +22,7 @@ public interface API {
     @POST("enter")
     Call<OperationAllowedResponse> operate(@Body EnterLeaveRequest request);
 
+    @POST("isAvailable")
+    Call<PlatformAvailableResponse> isAvailable(@Body PlatformAvailableRequest request);
 
 }

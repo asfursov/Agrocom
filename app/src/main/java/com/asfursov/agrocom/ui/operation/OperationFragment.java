@@ -14,6 +14,10 @@ import com.asfursov.agrocom.model.EnterLeaveRequest;
 import com.asfursov.agrocom.model.OperationAllowedRequest;
 import com.asfursov.agrocom.model.OperationAllowedResponse;
 import com.asfursov.agrocom.model.OperationId;
+import com.asfursov.agrocom.model.OperationResponse;
+import com.asfursov.agrocom.model.Platform;
+import com.asfursov.agrocom.model.PlatformAvailableRequest;
+import com.asfursov.agrocom.model.PlatformAvailableResponse;
 import com.asfursov.agrocom.model.VehicleData;
 import com.asfursov.agrocom.network.NetworkHelper;
 import com.asfursov.agrocom.state.AppData;
@@ -24,6 +28,7 @@ import com.google.gson.JsonParser;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 
 import butterknife.BindView;
 import retrofit2.Call;
@@ -37,6 +42,16 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
     public static final String SCAN_DRIVER = "Отсканируйте код с браслета:";
     public static final String NOT_ALLOWED = "НЕ РАЗРЕШЕНО\n";
+    public static final String DOC_DATA_TEMPLATE = "Документ прибытия №%s.\n" +
+            "%s\n" +
+            "%s\n";
+    public static final String PLATFORM_BUSY_TEMPLATE = "%s.\n" +
+            "ЗАНЯТА %s\n%s\n";
+    public static final String WRONG_PLATFORM = "Платформа определена некорректно.\n Повторите сканирование";
+    public static final String CHECKING_BARCODE = "Проверяем штрихкод";
+    public static final String OPERATION_REJECTED = "Операция '%s' завершена c ошибкой\n%s";
+    public static final String OPERATION_SUCCESSFULL = "Операция '%s' успешно завершена";
+    private static final String SCAN_PLATFORM = "Просканируйте код платформы:";
     @BindView(R.id.buttonCommitOperation)
     Button buttonCommit;
 
@@ -47,6 +62,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     @BindView(R.id.editTextPlate)
     EditText plateNumber;
     private VehicleData vehicle;
+    private Platform platform;
 
     @Override
     protected void initialize() {
@@ -67,7 +83,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
         NetworkHelper.getInstance().getAPI().operate(
                 new EnterLeaveRequest(vehicle,
                         AppData.getInstance().getUser(), plateNumber.getText().toString(),
-                        operationId)
+                        operationId, platform)
         ).enqueue(new Callback<OperationAllowedResponse>() {
             @Override
             public void onResponse(Call<OperationAllowedResponse> call, Response<OperationAllowedResponse> response) {
@@ -102,6 +118,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     protected void processParameters(Bundle arguments) {
         super.processParameters(arguments);
         operationId = AppData.getInstance().getOperationId();
+        platform = AppData.getInstance().getPlatform();
     }
 
     @Override
@@ -118,6 +135,10 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     @NotNull
     @Override
     protected String getInitialText() {
+        switch (operationId) {
+            case WEIGH_START:
+                return SCAN_PLATFORM;
+        }
         return SCAN_DRIVER;
     }
 
@@ -144,13 +165,68 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
     @Override
     protected void processScannedBarcode(String barcode) {
-        information.setText("Проверяем штрихкод");
+        information.setText(CHECKING_BARCODE);
         startProgressIndicator();
+        if (operationId == OperationId.WEIGH_START
+                && platform == null)
+            checkPlatform(barcode);
+        else
+            checkVehicle(barcode);
+    }
+
+    private void checkPlatform(String barcode) {
+        NetworkHelper.getInstance().getAPI()
+                .isAvailable(
+                        new PlatformAvailableRequest(AppData.getInstance().getUser(), barcode)
+                ).enqueue(new Callback<PlatformAvailableResponse>() {
+
+            @Override
+            public void onResponse(Call<PlatformAvailableResponse> call, Response<PlatformAvailableResponse> response) {
+                stopProgressIndicator();
+
+                if (response.code() == 200 && response.body() != null) {
+                    processPlatform(barcode, response.body());
+                } else
+                    setErrorText(WRONG_BARCODE + "\n" + decodeResponseMessage(response));
+
+
+            }
+
+            @Override
+            public void onFailure(Call<PlatformAvailableResponse> call, Throwable t) {
+                stopProgressIndicator();
+                setErrorText(Constants.NETWORKING_ERROR + "\n+" + t.getMessage());
+
+            }
+        });
+    }
+
+    private void processPlatform(String barcode, PlatformAvailableResponse body) {
+        if (body.getPlatform() == null) {
+            setErrorText(WRONG_PLATFORM);
+            return;
+        }
+        if (body.isAllowed()) {
+            AppData.getInstance().setPlatform(body.getPlatform());
+            platform = body.getPlatform();
+            information.setText(platform.getName() + "\n" + SCAN_DRIVER);
+            information.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+        } else {
+            String docdata = String.format(
+                    PLATFORM_BUSY_TEMPLATE,
+                    body.getPlatform().getName(),
+                    body.getOccupiedBy(),
+                    body.getOccupiedFrom().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:dd")));
+            setErrorText(docdata);
+        }
+    }
+
+    private void checkVehicle(String barcode) {
         NetworkHelper.getInstance().getAPI().isAllowed(
                 new OperationAllowedRequest(
                         barcode,
                         AppData.getInstance().getUser().getId().toString(),
-                        operationId)
+                        operationId, platform)
         ).enqueue(new Callback<OperationAllowedResponse>() {
             @Override
             public void onResponse(Call<OperationAllowedResponse> call, Response<OperationAllowedResponse> response) {
@@ -174,7 +250,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
         });
     }
 
-    private String decodeResponseMessage(Response<OperationAllowedResponse> response) {
+    private String decodeResponseMessage(Response<? extends OperationResponse> response) {
         if (response.body() != null)
             return response.body().getMessage();
         if (response.errorBody() != null) {
@@ -195,9 +271,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
     private void processAllowance(String barcode, OperationAllowedResponse body) {
         String docdata = String.format(
-                "Документ прибытия №%s.\n" +
-                        "%s\n" +
-                        "%s\n",
+                DOC_DATA_TEMPLATE,
 
                 body.getVehicle().getNumber(),
                 body.getVehicle().getDriver(),
@@ -225,7 +299,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
                 Bundle params = new Bundle();
                 params.putString(ERROR, "");
                 params.putString(MESSAGE, String.format(
-                        "Операция '%s' завершена c ошибкой\n%s", operationId.getName(), message)
+                        OPERATION_REJECTED, operationId.getName(), message)
                 );
                 ((MainActivity) getActivity()).getNavController().navigate(R.id.resultFragment, params);
             }
@@ -236,7 +310,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
         Bundle params = new Bundle();
         params.putString(MESSAGE, String.format(
-                "Операция '%s' успешно завершена", operationId.getName())
+                OPERATION_SUCCESSFULL, operationId.getName())
         );
         ((MainActivity) getActivity()).getNavController().navigate(R.id.resultFragment, params);
     }
