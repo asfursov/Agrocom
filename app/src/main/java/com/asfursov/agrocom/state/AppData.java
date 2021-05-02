@@ -85,4 +85,5 @@ public class AppData {
     public void setPlatform(Platform platform) {
         this.platform = platform;
     }
+
 }

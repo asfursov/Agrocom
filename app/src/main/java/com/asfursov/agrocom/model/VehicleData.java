@@ -8,6 +8,16 @@ public class VehicleData {
     String plateNumber;
     String driver;
     String phone;
+    Boolean isTrailer;
+    Boolean trailerSeparately;
+
+    public Boolean getTrailer() {
+        return isTrailer;
+    }
+
+    public Boolean getTrailerSeparately() {
+        return trailerSeparately;
+    }
 
     public String getNumber() {
         return number;

@@ -42,8 +42,7 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
     public static final String SCAN_DRIVER = "Отсканируйте код с браслета:";
     public static final String NOT_ALLOWED = "НЕ РАЗРЕШЕНО\n";
-    public static final String DOC_DATA_TEMPLATE = "Документ прибытия №%s.\n" +
-            "%s\n" +
+    public static final String DOC_DATA_TEMPLATE = "Документ %s №%s.\n" +
             "%s\n";
     public static final String PLATFORM_BUSY_TEMPLATE = "%s.\n" +
             "ЗАНЯТА %s\n%s\n";
@@ -52,6 +51,12 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
     public static final String OPERATION_REJECTED = "Операция '%s' завершена c ошибкой\n%s";
     public static final String OPERATION_SUCCESSFULL = "Операция '%s' успешно завершена";
     private static final String SCAN_PLATFORM = "Просканируйте код платформы:";
+    public static final String NO_ANALYZIS = "НЕТ АНАЛИЗА\n";
+    public static final String ANALYZIS_RESULT = "Влажность:%.1f\n" +
+            "Сорность:%.1f\n";
+    public static final String TRAILER_SEPARATELY = "ПРИЦЕП ОТДЕЛЬНО!!\n";
+    public static final String TRAILER = "ПРИЦЕП";
+    public static final String MAINDOC = "ОСНОВНОЙ";
     @BindView(R.id.buttonCommitOperation)
     Button buttonCommit;
 
@@ -272,14 +277,14 @@ public class OperationFragment extends com.asfursov.agrocom.ui.common.ScanningFo
 
     private void processAllowance(String barcode, OperationAllowedResponse body) {
         String docdata = String.format(
-                DOC_DATA_TEMPLATE,
-
+                (body.getVehicle().getTrailerSeparately() ? TRAILER_SEPARATELY : "") + DOC_DATA_TEMPLATE,
+                body.getVehicle().getTrailer() ? TRAILER : MAINDOC,
                 body.getVehicle().getNumber(),
-                body.getVehicle().getDriver(),
-                body.getVehicle().getPhone())
+                body.getVehicle().getDriver())
                 + (operationId == OperationId.UNLOAD_START ?
-                String.format("\nВлажность:%.1f\n" +
-                        "Сорность:%.1f", body.getHumidity(), body.getTrash()) : "");
+                body.getHumidity() > 0 ? String.format(ANALYZIS_RESULT, body.getHumidity(), body.getTrash()) : NO_ANALYZIS
+                : ""
+        );
         if (!body.isAllowed()) {
             setErrorText(docdata + NOT_ALLOWED + body.getMessage());
             plateGroup.setVisibility(View.GONE);

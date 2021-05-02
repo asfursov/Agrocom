@@ -1,9 +1,11 @@
 package com.asfursov.agrocom;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     TextView username;
     @BindView(R.id.userRolesHeader)
     TextView roles;
+    @BindView(R.id.credentialsView)
+    TextView creds;
 
     MenuItem menuHome;
     MenuItem menuLogin;
@@ -81,13 +85,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         View header = navigationView.getHeaderView(0);
-        ButterKnife.bind(this,header);
+        ButterKnife.bind(this, header);
 
         Menu menu = navigationView.getMenu();
         menuLogin = menu.findItem(R.id.nav_login);
         menuLogout = menu.findItem(R.id.nav_logout);
         menuHome = menu.findItem(R.id.nav_home);
-
+        creds.setText(R.string.copyrightCreds);
+        creds.setText(String.format(creds.getText().toString(), BuildConfig.VERSION_NAME));
         UpdateUser();
         UpdateMenu();
     }
@@ -138,5 +143,16 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

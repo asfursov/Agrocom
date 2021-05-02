@@ -73,4 +73,5 @@
     <string name="title_httpUser">Пользователь:</string>
     <string name="title_httpPassword">Пароль</string>
     <string name="noOperations">Добрый день! Мы вам рады, но для вас нет доступных операций!</string>
+    <string name="copyrightCreds">Мобильный клиент АУС\n(С) Фурсова Н.А.,2021.\nВерсия %s</string>
 </resources>

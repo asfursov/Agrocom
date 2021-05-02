@@ -126,7 +126,9 @@ public class LoginFragment extends com.asfursov.agrocom.ui.common.ScanningFormFr
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 checkPassword(barcode);
+                ((MainActivity) getActivity()).hideKeyboard();
             }
         });
 
